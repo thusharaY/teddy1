@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>talking teddy</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #media-container {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      overflow: hidden; /* To ensure the video stays within the container */
+    }
+
+    #video, #audio {
+      width: 100%;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div id="media-container">
+  <video id="video" preload="auto">
+    <source src="video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <audio id="audio" preload="auto">
+    <source src="audio.mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
+  </audio>
+</div>
+
+<script>
+  const video = document.getElementById('video');
+  const audio = document.getElementById('audio');
+
+  // Add click event listener to the video element
+  video.addEventListener('click', function (event) {
+    // Get the coordinates of the click relative to the video element
+    const rect = video.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    // Check if the click is within a specific area (e.g., the top half of the video)
+    if (x > 190 && x<300 &&y>410 &&y<500) {
+      playMedia();
+    }
+  });
+
+  function playMedia() {
+    video.currentTime = 0; // Reset video to the beginning
+    audio.currentTime = 0; // Reset audio to the beginning
+    video.play();
+    audio.play();
+  }
+
+  // Optional: Hide the browser's default controls
+  video.controls = false;
+  audio.controls = false;
+</script>
+
+</body>
+</html>
+
+
+
+
